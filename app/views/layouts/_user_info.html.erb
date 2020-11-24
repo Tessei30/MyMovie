@@ -1,0 +1,14 @@
+
+
+<%= link_to user_path(users) do %>
+  <div class="media">
+    <div class="media-left align-self-center user-img">
+      <%= attachment_image_tag users, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:'50x50', class: "img-circle" %>
+    </div>
+    <div class="media-body user-name">
+      <p><%= users.name %></p>
+    </div>
+  </div>
+<% end %>
+
+

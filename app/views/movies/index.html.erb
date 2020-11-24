@@ -1,0 +1,50 @@
+<div class="flash">
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
+</div>
+<%= render "layouts/error", movie: @movie %>
+<div class="row">
+  <div class="col-xs-0 col-sm-3 col-lg-4">
+    <h1 class="left-wrapper-logo">User</h1>
+    <div class="left-wrapper-above">
+      <%= render "layouts/user_info", users: @user %>
+    </div>
+    <h1 class="left-wrapper-logo">New Movie</h1>
+    <div class="left-wrapper-below">
+      <%= render "movies/new_movie", movie: @movie %>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-lg-8">
+    <h1>Movies</h1>
+
+    <% @movies.each do |movie| %>
+    <div class="right-wrapper">
+      <div class="movies-list-above">
+        <div class="movies-list-user">
+          <%= link_to user_path(movie.user) do %>
+          <%= attachment_image_tag movie.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:'50x50', class: "img-circle" %>
+          <%= movie.user.name %>
+          <% end %>
+          <div class="movies-list-favorite">
+            <%= render "layouts/favorite", movie: movie %>
+          </div>
+        </div>
+      </div>
+      <div class="movies-list-below">
+        <div class="movies-list-ttl">
+          <%= link_to movie.title, movie_path(movie.id) %>
+        </div>
+        <div class="movies-list-star"></div>
+        <div class="movies-list-body-ttl">
+          <%= movie.body_title %>
+        </div>
+        <div class="movies-list-body">
+          <%= movie.bdy %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

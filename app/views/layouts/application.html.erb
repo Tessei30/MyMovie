@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mymovie</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <header class="navbar navbar-fixed-top">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <span class="header-logo">My Movies</span>
+        </nav>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li>
+              <%= form_with(url: search_movies_path, local: true, method: :get, class: "search-form") do |f| %>
+                <%= f.text_field :keyword, class: "search-input" %>
+                <%= f.submit "search", class: "btn btn-warning search-btn" %>
+              <% end %>
+              </li>
+              <li><%= link_to "Home", user_path(current_user), class: "header-list" %></li>
+              <li><%= link_to "Users", users_path, class: "header-list" %></li>
+              <li><%= link_to "Movies", movies_path, class: "header-list" %></li>
+              <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "header-list" %></li>
+            <% else %>
+              <li><%= link_to "Home", "/", class: "header-list" %></li>
+              <li><%= link_to "About", home_about_path, class: "header-list" %></li>
+              <li><%= link_to "Sign in", new_user_registration_path, class: "header-list" %></li>
+              <li><%= link_to "Log in", new_user_session_path, class: "header-list" %></li>
+            <% end %>
+          </ul>
+        </nav>
+    </div>
+    </header>
+    <main>
+      <p class="alert"><%= alert %></p>
+      <div class="container container-below">
+        <%= yield %>
+      </div>
+    </main>
+    <footer class="navbar navbar-fixed-bottom">
+      <small>©Tessei Nakamura︎</small>
+    </footer>
+  </body>
+</html>

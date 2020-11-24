@@ -1,0 +1,26 @@
+<%= render 'layouts/error', movie: @user %>
+<div class="row">
+    <div class="userinfo">
+      <h1>User info</h1>
+      <%= form_with model: @user do |f| %>
+        <div class="form-group row">
+          <%= f.label :profile_image, "Image", class: 'col-xs-2 col-form-label' %>
+          <div class="col-xs-4">
+            <%= f.attachment_field :profile_image, class: 'form-control-file' %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :name, "Name", class: 'col-xs-2 col-form-label' %>
+          <div class="col-xs-4">
+            <%= f.text_field :name, class: 'form-control userinfo-name', placeholder: "#{@user.name}" %>
+          </div>
+        </div>
+        <div class="action row btn">
+          <%= f.submit 'Update', class: 'btn btn-warning btn-block' %>
+        </div>
+      <% end %>
+      <p>
+        <span><%= link_to "Back", user_path(@user), class: 'back-btn' %></span>
+      </p>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="flash">
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
+</div>
+<%= render "layouts/error", movie: @movie %>
+<div class="row">
+    <div class="col-xs-0 col-sm-3 col-lg-4">
+        <h1 class="left-wrapper-logo">User</h1>
+        <div class="left-wrapper-above">
+          <%= render "layouts/user_info", users: @user %>
+        </div>
+        <h1 class="left-wrapper-logo">New Movie</h1>
+        <div class="left-wrapper-below">
+          <%= render "movies/new_movie", movie: @movie %>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-9 col-lg-8">
+        <h1>Users</h1>
+
+        <% @users.each do |user| %>
+        <div class="users-right-wrapper">
+          <%= link_to user_path(user) do %>
+           <div class="media">
+             <div class="media-left media-middle user-wrapper-img">
+               <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60', class: "img-circle" %>
+             </div>
+             <div class="media-body user-wrapper-name">
+               <p><%= user.name %></p>
+             </div>
+           </div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+</div>

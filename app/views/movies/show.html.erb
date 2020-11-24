@@ -1,0 +1,69 @@
+<div class="flash">
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
+</div>
+<%= render 'layouts/error', movie: @movie_comment %>
+<div class="row">
+  <div class="col-xs-0 col-sm-3 col-lg-4">
+    <h1 class="left-wrapper-logo">User</h1>
+    <div class="left-wrapper-above">
+      <%= render "layouts/user_info", users: @user %>
+    </div>
+    <h1 class="left-wrapper-logo">Comment</h1>
+    <div class="left-wrapper-below">
+      <%= form_with(model:[@movie, @movie_comment], local: true) do |f| %>
+        <%= f.text_area :comment, class: "form-control" %>
+        <%= f.submit "Submit", class: "btn btn-warning btn-block" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-lg-8">
+    <h1>Movie</h1>
+
+    <div class="right-wrapper">
+      <div class="movies-list-above">
+        <%= link_to user_path(@movie.user) do %>
+          <div class="movies-list-user">
+            <%= attachment_image_tag @movie.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:'50x50', class: "img-circle" %>
+            <%= @movie.user.name %>
+            <div class="movies-list-favorite">
+              <%= render "layouts/favorite", movie: @movie %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="movies-list-below">
+        <div class="movies-list-ttl">
+          <%= link_to @movie.title, movie_path(@movie.id) %>
+        </div>
+        <div class="movies-list-body-ttl">
+          <%= @movie.body_title %>
+        </div>
+        <div class="movies-list-body">
+          <%= @movie.bdy %>
+        </div>
+        <div class="movies-list-edit">
+        <% if @movie.user == current_user %>
+          <td><%= link_to 'Edit', edit_movie_path(@movie), class: "btn-sm btn-warning edit_movie_#{@movie.id}" %></td>
+          <td><%= link_to 'Destroy', @movie, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_movie_#{@movie.id}"%></td>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <h1>Comments</h1>
+    <div class="comment">
+      <% @movie_comments.each do |comment| %>
+        <div class="per-comment">
+          <%= comment.comment %>
+        </div>
+        <div class="movies-list-edit">
+        <% if comment.user == current_user %>
+          <td><%= link_to 'Destroy', movie_movie_comment_path(comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_movie_#{comment.id}"%></td>
+        <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

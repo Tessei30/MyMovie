@@ -1,0 +1,43 @@
+
+<%= render "layouts/error", movie: @new_movie %>
+<div class="row">
+  <div class="col-xs-0 col-sm-3 col-lg-4">
+    <h1 class="left-wrapper-logo">User</h1>
+    <div class="left-wrapper-above">
+      <%= render "layouts/user_info", users: @user %>
+    </div>
+    <h1 class="left-wrapper-logo">New Movie</h1>
+    <div class="left-wrapper-below">
+      <%= render "movies/new_movie", movie: @new_movie %>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-lg-8">
+    <h1>Edit</h1>
+    <div class="edit-movie">
+      <%= form_with model: @movie  do |f| %>
+        <div class="form-group">
+          <%= f.label :title, "Title" %>
+          <%= f.text_field :title, class: 'form-control movie_title', placeholder: "#{@movie.title}" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :body_title, "Comment Title" %>
+          <%= f.text_field :body_title, class: 'form-control movie_body_title', placeholder: "#{@movie.body_title}" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :bdy, "Comment" %>
+          <%= f.text_area :bdy, class: 'form-control movie_body', placeholder: "#{@movie.bdy}" %>
+        </div>
+
+        <div class="action row btn">
+          <%= f.submit "Update", class: 'btn btn-warning btn-block' %>
+        </div>
+      <% end %>
+      <p>
+        <span><%= link_to "Back", movie_path(@movie), class: 'back-btn' %></span>
+      </p>
+    </div>
+  </div>
+</div>
