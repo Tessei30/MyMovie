@@ -9,7 +9,7 @@
 # Usage
  
 ```bash
-git clone https://github.com/Tessei30/MyMovie
+git clone https://github.com/Tessei30/MyMovie.git
 cd mymovie
 bundle install
 rails db:create
