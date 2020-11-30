@@ -10,9 +10,8 @@
  
 ```bash
 git clone https://github.com/Tessei30/MyMovie.git
-cd mymovie
+cd MyMovie
 bundle install
-rails db:create
 rails db:migrate
 rails s
 ```
